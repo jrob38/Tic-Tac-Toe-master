@@ -123,8 +123,6 @@ def computer_move(board, computer, human):
 		else:			
 			if board[1] == board[3] == human or board[7] == board[5] == human:
 				BEST_MOVES = (4, 2, 0, 6, 8, 1, 3, 5, 7)
-			elif board[1] == board[5] == human or board[7] == board[3] == human:
-				BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
 			else:
 				BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
 			
