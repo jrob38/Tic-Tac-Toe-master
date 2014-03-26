@@ -64,23 +64,17 @@ def legal_moves(board):
 	return moves
 		
 def winner(board):
-	WAYS_TO_WIN = ((0,1,2),
-				   (3,4,5),
-				   (6,7,8),
-				   (0,3,6),
-				   (1,4,7),
-				   (2,5,8),
-				   (0,4,8),
-				   (2,4,6))
+	WAYS_TO_WIN = ((0,1,2),(3,4,5),(6,7,8),(0,3,6),(1,4,7),(2,5,8),(0,4,8),(2,4,6))
 				   
 	for row in WAYS_TO_WIN:
 		if board[row[0]] == board[row[1]] == board[row[2]] != EMPTY:
 			winner = board[row[0]]
 			return winner
 			
-		if EMPTY not in board:
-			return TIE
-		return None
+	if EMPTY not in board:
+		return TIE
+		
+	return None
 
 def ask_number(question, low, high):
 	response = None
@@ -96,6 +90,34 @@ def human_move(board, human):
 		if move not in legal:
 			print('\nThat square is occupied.  Choose another.\n')
 	return move
+	
+def computer_move(board, computer, human):
+	#board = board[:]
+	BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+	print('I will now make my move.')
+	legal = legal_moves(board)
+	
+	#if computer can when, make the winning move
+	for move in legal:
+		board[move] = computer
+		if winner(board) == computer:
+			print('Choosing %s' % move)
+			return move
+		board[move] = EMPTY
+	
+	#if human can when, block that move
+	for move in legal:
+		board[move] = human
+		if winner(board) == human:
+			print('Choosing %s' % move)
+			return move
+		board[move] = EMPTY
+	
+	#else take the next best move
+	for move in BEST_MOVES:
+		if move in legal:
+			print('Choosing %s' % move)
+			return move
 		
 def main():
 	display_instruct()
@@ -108,6 +130,9 @@ def main():
 		if turn == human:
 			move = human_move(board, human)
 			board[move] = human
+		else:
+			move = computer_move(board, computer, human)
+			board[move] = computer
 		display_board(board)
 		
 	input('Press any key to continue.')
