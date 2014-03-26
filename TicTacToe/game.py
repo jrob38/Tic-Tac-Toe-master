@@ -118,6 +118,12 @@ def computer_move(board, computer, human):
 		if move in legal:
 			print('Choosing %s' % move)
 			return move
+			
+def next_turn(turn):
+	if turn == X:
+		return O
+	else:
+		return X
 		
 def main():
 	display_instruct()
@@ -134,6 +140,7 @@ def main():
 			move = computer_move(board, computer, human)
 			board[move] = computer
 		display_board(board)
+		turn = next_turn(turn)
 		
 	input('Press any key to continue.')
 	
