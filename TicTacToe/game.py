@@ -92,8 +92,15 @@ def human_move(board, human):
 	return move
 	
 def computer_move(board, computer, human):
-	#board = board[:]
-	BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+	if computer == X:
+		if board[5] == human or board[2] == human:
+			BEST_MOVES = (6, 8, 0, 2, 4, 1, 3, 5, 7)
+		elif board[1] == human:
+			BEST_MOVES = (6, 8, 4, 0, 2, 3, 5, 7, 1)
+		else:
+			BEST_MOVES = (6, 8, 2, 0, 4, 1, 3, 5, 7)
+	else:
+		BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
 	print('I will now make my move.')
 	legal = legal_moves(board)
 	
@@ -129,7 +136,7 @@ def outcome(the_winner, computer, human):
 	if the_winner != TIE:
 		print('%s, won!\n' % the_winner)
 	else:
-		print('It''s a tie!\n')
+		print('It is a tie!\n')
 		
 	if the_winner == computer:
 		print('You lose!  Better luck next time.')
@@ -138,7 +145,7 @@ def outcome(the_winner, computer, human):
 		print('You win.  There must be a mistake.')
 		
 	elif the_winner == TIE:
-		print('You''ll never win.  This is the best you can do.')
+		print('You will never win.  This is the best you can do.')
 		
 def main():
 	display_instruct()
@@ -159,7 +166,7 @@ def main():
 	the_winner = winner(board)
 	outcome(the_winner, computer, human)
 		
-	input('Press any key to continue.')
+	input('Press any key to exit.')
 	
 main()
 
