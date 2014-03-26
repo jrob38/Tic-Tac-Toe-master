@@ -42,10 +42,26 @@ def pieces():
 		computer = X
 		human = O
 	return computer, human
+	
+def new_board():
+	board = []
+	for square in range(NUM_SQUARES):
+		board.append(EMPTY)
+	return board
+	
+def display_board(board):
+	print('\n\t %s | %s | %s' % (board[0], board[1], board[2]))
+	print('\t ---------')
+	print('\n\t %s | %s | %s' % (board[3], board[4], board[5]))
+	print('\t ---------')
+	print('\n\t %s | %s | %s' % (board[6], board[7], board[8]))
 
 def main():
 	display_instruct()
 	computer, human = pieces()
+	turn = X
+	board = new_board()
+	display_board(board)
 	input('Press any key to continue.')
 	
 main()
