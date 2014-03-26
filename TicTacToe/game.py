@@ -54,7 +54,14 @@ def display_board(board):
 	print('\t ---------')
 	print('\n\t %s | %s | %s' % (board[3], board[4], board[5]))
 	print('\t ---------')
-	print('\n\t %s | %s | %s' % (board[6], board[7], board[8]))
+	print('\n\t %s | %s | %s \n' % (board[6], board[7], board[8]))
+	
+def legal_moves(board):
+	moves = []
+	for square in range(NUM_SQUARES):
+		if board[square] == EMPTY:
+			moves.append(square)
+		return moves
 
 def main():
 	display_instruct()
