@@ -125,6 +125,21 @@ def next_turn(turn):
 	else:
 		return X
 		
+def outcome(the_winner, computer, human):
+	if the_winner != TIE:
+		print('%s, won!\n' % the_winner)
+	else:
+		print('It''s a tie!\n')
+		
+	if the_winner == computer:
+		print('You lose!  Better luck next time.')
+		
+	elif the_winner == human:
+		print('You win.  There must be a mistake.')
+		
+	elif the_winner == TIE:
+		print('You''ll never win.  This is the best you can do.')
+		
 def main():
 	display_instruct()
 	computer, human = pieces()
@@ -141,6 +156,8 @@ def main():
 			board[move] = computer
 		display_board(board)
 		turn = next_turn(turn)
+	the_winner = winner(board)
+	outcome(the_winner, computer, human)
 		
 	input('Press any key to continue.')
 	
