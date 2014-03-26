@@ -20,9 +20,32 @@ def display_instruct():
 		\n
 		"""
 		)
+		
+def ask_yes_no(question):
+	response = None
+	while response not in ('y', 'n'):
+		response = input(question).lower()
+		if response == 'yes':
+			response = 'y'
+		if response == 'no':
+			response = 'n'
+	return response
+
+def pieces():
+	go_first = ask_yes_no('Would you like to go first? (y/n): ')
+	if go_first == 'y':
+		print('\nYou have the first move.')
+		human = X
+		computer = O
+	else:
+		print('\nI will go first.')
+		computer = X
+		human = O
+	return computer, human
 
 def main():
 	display_instruct()
+	computer, human = pieces()
 	input('Press any key to continue.')
 	
 main()
