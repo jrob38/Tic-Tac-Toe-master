@@ -82,6 +82,12 @@ def winner(board):
 			return TIE
 		return None
 
+def ask_number(question, low, high):
+	response = None
+	while response not in range(low, high):
+		response = int(input(question))
+	return response
+		
 def main():
 	display_instruct()
 	computer, human = pieces()
