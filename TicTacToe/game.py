@@ -100,11 +100,33 @@ def computer_move(board, computer, human):
 		else:
 			BEST_MOVES = (6, 8, 2, 0, 4, 1, 3, 5, 7)
 	else:
-		BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+		if board[4] == human:
+			BEST_MOVES = (0, 2, 6, 8, 1, 3, 5, 7)
+		elif human in (board[0], board[2], board[6], board[8]):
+			if board[0] == board[5] == human or board[2] == board[3] == human:
+				BEST_MOVES = (4, 7, 0, 2, 6, 8, 1, 3, 5)
+			elif board[6] == board[5] == human or board[8] == board[3] == human:
+				BEST_MOVES = (4, 1, 0, 2, 6, 8, 3, 5, 7)
+			elif board[0] == board[7] == human or board[6] == board[1] == human:
+				BEST_MOVES = (4, 5, 0, 2, 6, 8, 1, 3, 7)
+			elif board[2] == board[7] == human or board[8] == board[1] == human:
+				BEST_MOVES = (4, 3, 0, 2, 6, 8, 1, 5, 7)
+			elif board[0] == board[8] == human or board[2] == board[6] == human:
+				BEST_MOVES = (4, 1, 0, 2, 6, 8, 3, 5, 7)
+			else:
+				BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+		else:			
+			if board[1] == board[3] == human or board[7] == board[5] == human:
+				BEST_MOVES = (4, 2, 0, 6, 8, 1, 3, 5, 7)
+			elif board[1] == board[5] == human or board[7] == board[3] == human:
+				BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+			else:
+				BEST_MOVES = (4, 0, 2, 6, 8, 1, 3, 5, 7)
+			
 	print('I will now make my move.')
 	legal = legal_moves(board)
 	
-	#if computer can when, make the winning move
+	#if computer can win, make the winning move
 	for move in legal:
 		board[move] = computer
 		if winner(board) == computer:
@@ -112,7 +134,7 @@ def computer_move(board, computer, human):
 			return move
 		board[move] = EMPTY
 	
-	#if human can when, block that move
+	#if human can win, block that move
 	for move in legal:
 		board[move] = human
 		if winner(board) == human:
