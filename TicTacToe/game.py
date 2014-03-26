@@ -61,7 +61,7 @@ def legal_moves(board):
 	for square in range(NUM_SQUARES):
 		if board[square] == EMPTY:
 			moves.append(square)
-		return moves
+	return moves
 		
 def winner(board):
 	WAYS_TO_WIN = ((0,1,2),
@@ -87,6 +87,15 @@ def ask_number(question, low, high):
 	while response not in range(low, high):
 		response = int(input(question))
 	return response
+	
+def human_move(board, human):
+	legal = legal_moves(board)
+	move = None
+	while move not in legal:
+		move = ask_number('Where would you like to move? (0 - 8): ', 0, NUM_SQUARES)
+		if move not in legal:
+			print('\nThat square is occupied.  Choose another.\n')
+	return move
 		
 def main():
 	display_instruct()
@@ -94,6 +103,13 @@ def main():
 	turn = X
 	board = new_board()
 	display_board(board)
+	
+	while not winner(board):
+		if turn == human:
+			move = human_move(board, human)
+			board[move] = human
+		display_board(board)
+		
 	input('Press any key to continue.')
 	
 main()
