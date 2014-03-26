@@ -79,7 +79,12 @@ def winner(board):
 def ask_number(question, low, high):
 	response = None
 	while response not in range(low, high):
-		response = int(input(question))
+		try:
+			response = int(input(question))
+			if response not in range(low, high):
+				raise ValueError
+		except ValueError:
+			print('Please enter only a number (0-8).')
 	return response
 	
 def human_move(board, human):
